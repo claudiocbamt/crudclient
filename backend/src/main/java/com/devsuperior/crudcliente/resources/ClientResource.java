@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,7 +48,7 @@ public class ClientResource  {
 		return ResponseEntity.ok().body(dto);
 	}
 	
-@PostMapping
+    @PostMapping
 	
   	public ResponseEntity<ClientDTO> Insert(@RequestBody ClientDTO dto){
   		
@@ -63,11 +64,17 @@ public class ClientResource  {
 
  @PutMapping(value= "/{id}")
     public ResponseEntity<ClientDTO> Update(@PathVariable("id")Long Id, @RequestBody ClientDTO dto){
-	    dto = service.update( Id, dto);
+	    dto = service.Update( Id, dto);
 		
 		return ResponseEntity.ok().body(dto);
 	}
 
+ @DeleteMapping(value= "/{id}")
+ public ResponseEntity<ClientDTO> Delete(@PathVariable("id")Long Id){
+	    service.Delete( Id);
+		
+		return ResponseEntity.noContent().build();
+	}
 
    
 
